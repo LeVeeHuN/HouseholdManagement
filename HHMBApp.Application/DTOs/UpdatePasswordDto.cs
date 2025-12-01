@@ -12,4 +12,17 @@ namespace HHMBApp.Application.DTOs
         public string OldPassword { get; set; } = null!;
         public string NewPassword { get; set; } = null!;
     }
+
+    public class UpdatePasswordResponseDto
+    {
+        public Guid? UserId { get; set; }
+        public UpdatePasswordStatus Result { get; set; }
+    }
+
+    public enum UpdatePasswordStatus
+    {
+        OK = 0,
+        UserNotFound = 1,
+        PasswordMismatch = 2
+    }
 }

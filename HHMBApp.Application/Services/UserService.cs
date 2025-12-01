@@ -9,17 +9,19 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using BCrypt.Net;
 
 namespace HHMBApp.Application.Services
 {
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository = null!;
-        private readonly PasswordHasher<User> _passwordHasher = new PasswordHasher<User>();
+        private readonly IJwtTokenService _jwtTokenService = null!;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IJwtTokenService jwtTokenService)
         {
             _userRepository = userRepository;
+            _jwtTokenService = jwtTokenService;
         }
 
         public async Task<CreateUserResponseDto> AddUser(CreateUserDto createUserDto)
@@ -34,7 +36,7 @@ namespace HHMBApp.Application.Services
                     Username = null
                 };
             // Check if the username is already taken or not
-            if (_userRepository.ReadUser(createUserDto.Username) == null)
+            if (await _userRepository.ReadUser(createUserDto.Username) == null)
             {
                 return new CreateUserResponseDto()
                 {
@@ -43,28 +45,107 @@ namespace HHMBApp.Application.Services
                     Username = null
                 };
             }
-            // TODO Create new user and hash the password
+            
+            User? newUser = await _userRepository.CreateUser(new User(){Id = Guid.NewGuid(), Username = createUserDto.Username, Password = BCrypt.Net.BCrypt.HashPassword(createUserDto.Password)});
 
+            if (newUser == null)
+            {
+                return new CreateUserResponseDto()
+                {
+                    Result = CreateUserResult.UserCreateError,
+                    Id = null,
+                    Username = null
+                };
+            }
+
+            return new CreateUserResponseDto()
+            {
+                Result = CreateUserResult.OK,
+                Id = newUser.Id,
+                Username = newUser.Username,
+            };
         }
 
-        public Task<User?> GetUser(Guid userId)
+        public async Task<User?> GetUser(Guid userId)
         {
-            throw new NotImplementedException();
+            return await _userRepository.ReadUser(userId);
         }
 
-        public Task<User?> GetUser(string username)
+        public async Task<User?> GetUser(string username)
         {
-            throw new NotImplementedException();
+            return await _userRepository.ReadUser(username);
         }
 
-        public Task<bool> UpdatePassword(UpdatePasswordDto updatePasswordDto)
+        public async Task<UpdatePasswordResponseDto> UpdatePassword(UpdatePasswordDto updatePasswordDto)
         {
-            throw new NotImplementedException();
+            // Find the user, check if password is OK, then change it
+            User? userToChangePassword = await GetUser(updatePasswordDto.UserId);
+            if (userToChangePassword == null)
+            {
+                return new UpdatePasswordResponseDto()
+                {
+                    UserId = null,
+                    Result = UpdatePasswordStatus.UserNotFound
+                };
+            }
+            
+            // Check password
+            bool passwordOk = BCrypt.Net.BCrypt.Verify(updatePasswordDto.OldPassword, userToChangePassword.Password);
+
+            if (!passwordOk)
+            {
+                return new UpdatePasswordResponseDto()
+                {
+                    UserId = userToChangePassword.Id,
+                    Result = UpdatePasswordStatus.UserNotFound
+                };
+            }
+            
+            userToChangePassword.Password = BCrypt.Net.BCrypt.HashPassword(updatePasswordDto.NewPassword);
+            User? updatedUser = await _userRepository.UpdateUser(userToChangePassword); // Won't be null
+
+            return new UpdatePasswordResponseDto()
+            {
+                UserId = updatedUser.Id,
+                Result = UpdatePasswordStatus.OK
+            };
         }
 
-        public Task<bool> Login(string username, string password)
+        public async Task<LoginResponseDto> Login(string username, string password)
         {
-            throw new NotImplementedException();
+            // Check credentials, and if OK generate a JWT token
+            User? userToLogin = await GetUser(username);
+
+            if (userToLogin == null)
+            {
+                return new LoginResponseDto()
+                {
+                    JwtToken = null,
+                    UserId = null,
+                    Result = LoginResponseStatus.LoginError
+                };
+            }
+            
+            // Check password
+            bool passwordOk = BCrypt.Net.BCrypt.Verify(password, userToLogin.Password);
+
+            if (!passwordOk)
+            {
+                return new LoginResponseDto()
+                {
+                    JwtToken = null,
+                    UserId = userToLogin.Id,
+                    Result = LoginResponseStatus.LoginError
+                };
+            }
+            
+            // Password OK
+            return new LoginResponseDto()
+            {
+                JwtToken = _jwtTokenService.GenerateToken(userToLogin),
+                UserId = userToLogin.Id,
+                Result = LoginResponseStatus.OK
+            };
         }
     }
 }

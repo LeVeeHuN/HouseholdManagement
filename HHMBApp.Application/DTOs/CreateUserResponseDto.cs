@@ -17,6 +17,7 @@ namespace HHMBApp.Application.DTOs
     {
         OK = 0,
         UsernameTaken = 1,
-        UsernameError = 2
+        UsernameError = 2,
+        UserCreateError = 3
     }
 }

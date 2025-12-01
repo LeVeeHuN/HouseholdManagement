@@ -12,8 +12,8 @@ namespace HHMBApp.Application.Interfaces
     {
         Task<User?> GetUser(Guid userId);
         Task<User?> GetUser(string username);
-        Task<User?> AddUser(CreateUserDto createUserDto);
-        Task<bool> UpdatePassword(UpdatePasswordDto updatePasswordDto);
-        Task<bool> Login(string username, string password);
+        Task<CreateUserResponseDto> AddUser(CreateUserDto createUserDto);
+        Task<UpdatePasswordResponseDto> UpdatePassword(UpdatePasswordDto updatePasswordDto);
+        Task<LoginResponseDto> Login(string username, string password);
     }
 }
