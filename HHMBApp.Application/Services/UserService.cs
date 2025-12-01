@@ -32,7 +32,7 @@ namespace HHMBApp.Application.Services
                 return new CreateUserResponseDto()
                 {
                     Result = CreateUserResult.UsernameError,
-                    Id = null,
+                    Id = Guid.Empty,
                     Username = null
                 };
             // Check if the username is already taken or not
@@ -41,7 +41,7 @@ namespace HHMBApp.Application.Services
                 return new CreateUserResponseDto()
                 {
                     Result = CreateUserResult.UsernameTaken,
-                    Id = null,
+                    Id = Guid.Empty,
                     Username = null
                 };
             }
@@ -53,7 +53,7 @@ namespace HHMBApp.Application.Services
                 return new CreateUserResponseDto()
                 {
                     Result = CreateUserResult.UserCreateError,
-                    Id = null,
+                    Id = Guid.Empty,
                     Username = null
                 };
             }
@@ -121,7 +121,7 @@ namespace HHMBApp.Application.Services
                 return new LoginResponseDto()
                 {
                     JwtToken = null,
-                    UserId = null,
+                    UserId = Guid.Empty,
                     Result = LoginResponseStatus.LoginError
                 };
             }

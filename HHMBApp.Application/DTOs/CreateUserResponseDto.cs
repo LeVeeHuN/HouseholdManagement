@@ -9,7 +9,7 @@ namespace HHMBApp.Application.DTOs
     public class CreateUserResponseDto
     {
         public CreateUserResult Result { get; set; }
-        public Guid? Id {  get; set; }
+        public Guid Id {  get; set; }
         public string? Username { get; set; }
     }
 
