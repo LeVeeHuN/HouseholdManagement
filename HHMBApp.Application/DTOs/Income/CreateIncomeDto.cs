@@ -14,6 +14,6 @@ namespace HHMBApp.Application.DTOs.Income
         public int Amount { get; set; }
         public DateTime Date { get; set; } = DateTime.UtcNow; // If no date is provided, use current date
         public string Title { get; set; } = null!;
-        public string Description { get; set; } = null!;
+        public string? Description { get; set; }
     }
 }

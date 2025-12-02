@@ -15,7 +15,7 @@ namespace HHMBApp.Application.DTOs.Income
         public int Amount { get; set; }
         public DateTime Date { get; set; }
         public string Title { get; set; } = null!;
-        public string Description { get; set; } = null!;
+        public string? Description { get; set; }
         public CreateIncomeResultStatus Result { get; set; }
     }
 

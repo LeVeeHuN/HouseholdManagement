@@ -12,5 +12,5 @@ public class Income
     public DateTime Date { get; set; }
     public Guid CategoryId { get; set; }
     public string Title { get; set; } = null!;
-    public string Description { get; set; } = null!;
+    public string? Description { get; set; }
 }

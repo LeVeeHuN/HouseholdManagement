@@ -17,7 +17,7 @@ namespace HHMBApp.Domain.Entities
         public DateTime Date { get; set; }
         public Guid CategoryId { get; set; }
         public string Title { get; set; } = null!;
-        public string Description { get; set; } = null!;
+        public string? Description { get; set; }
         public string? ReceiptBase64 { get; set; }
     }
 }
