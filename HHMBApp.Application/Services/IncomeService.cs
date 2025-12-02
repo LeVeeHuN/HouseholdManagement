@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// EASTER EGG: Ha ezt olvasod, akkor vendégem vagy egy sörre! :)
+
 namespace HHMBApp.Application.Services
 {
     public class IncomeService : IIncomeService
