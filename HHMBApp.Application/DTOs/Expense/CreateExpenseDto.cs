@@ -15,5 +15,6 @@ namespace HHMBApp.Application.DTOs.Expense
         public Guid HouseholdId { get; set; }
         public DateTime Date { get; set; } = DateTime.UtcNow; // If no date is provided, use current date
         public string? ReceiptBase64 { get; set; }
+        public int Amount { get; set; }
     }
 }
