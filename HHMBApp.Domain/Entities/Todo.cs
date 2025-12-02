@@ -13,7 +13,7 @@ namespace HHMBApp.Domain.Entities
         public Guid Id { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? DeadLine { get; set; }
-        public Guid CretedByUserId { get; set; }
+        public Guid CreatedByUserId { get; set; }
         public Guid AssignedToUserId { get; set; }
         public Guid ClosedByUserId { get; set; }
         public DateTime? ClosedAt { get; set; }
