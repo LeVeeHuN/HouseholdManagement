@@ -1,4 +1,4 @@
-namespace HHMBApp.Application.DTOs;
+namespace HHMBApp.Application.DTOs.Category;
 
 public class CreateCategoryResponseDto
 {

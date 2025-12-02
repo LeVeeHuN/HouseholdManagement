@@ -1,5 +1,4 @@
-﻿using HHMBApp.Application.DTOs;
-using HHMBApp.Application.Interfaces;
+﻿using HHMBApp.Application.Interfaces;
 using HHMBApp.Domain.Entities;
 using HHMBApp.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -10,6 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using BCrypt.Net;
+using HHMBApp.Application.DTOs.User;
 
 namespace HHMBApp.Application.Services
 {

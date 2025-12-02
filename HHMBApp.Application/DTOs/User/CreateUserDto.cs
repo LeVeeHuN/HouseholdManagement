@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HHMBApp.Application.DTOs
+namespace HHMBApp.Application.DTOs.User
 {
     public class CreateUserDto
     {

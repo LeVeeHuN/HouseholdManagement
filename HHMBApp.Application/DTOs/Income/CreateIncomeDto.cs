@@ -4,25 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HHMBApp.Application.DTOs
+namespace HHMBApp.Application.DTOs.Income
 {
-    public class CreateIncomeResponseDto
+    public class CreateIncomeDto
     {
-        public Guid Id { get; set; }
         public Guid HoueseholdId { get; set; }
         public Guid UserId { get; set; }
         public Guid CategoryId { get; set; }
         public int Amount { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.UtcNow; // If no date is provided, use current date
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
-        public CreateIncomeResultStatus Result { get; set; }
-    }
-
-    public enum CreateIncomeResultStatus
-    {
-        Success,
-        IncomeCreateError,
-        UpdateIncomeError
     }
 }

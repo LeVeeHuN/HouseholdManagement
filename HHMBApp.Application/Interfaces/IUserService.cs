@@ -1,4 +1,4 @@
-﻿using HHMBApp.Application.DTOs;
+﻿using HHMBApp.Application.DTOs.User;
 using HHMBApp.Domain.Entities;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,4 @@
-using HHMBApp.Application.DTOs;
+using HHMBApp.Application.DTOs.Category;
 using HHMBApp.Application.Interfaces;
 using HHMBApp.Domain.Entities;
 using HHMBApp.Infrastructure.Interfaces;
