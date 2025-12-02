@@ -11,6 +11,7 @@ namespace HHMBApp.Domain.Entities
     {
         [Key]
         public Guid Id { get; set; }
+        public DateTime CreatedAt { get; set; }
         public DateTime? DeadLine { get; set; }
         public Guid CretedByUserId { get; set; }
         public Guid AssignedToUserId { get; set; }
