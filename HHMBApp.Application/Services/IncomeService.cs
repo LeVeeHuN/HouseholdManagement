@@ -46,7 +46,7 @@ namespace HHMBApp.Application.Services
                 Id = Guid.NewGuid(),
                 HouseholdId = request.HoueseholdId,
                 UserId = request.UserId,
-                Category = category,
+                CategoryId = category.Id,
                 Amount = request.Amount,
                 Date = request.Date,
                 Title = request.Title,
@@ -76,7 +76,7 @@ namespace HHMBApp.Application.Services
                 Id = newIncomeAddResult.Id,
                 HoueseholdId = newIncomeAddResult.HouseholdId,
                 UserId = newIncomeAddResult.UserId,
-                CategoryId = newIncomeAddResult.Category.Id,
+                CategoryId = newIncomeAddResult.CategoryId,
                 Amount = newIncomeAddResult.Amount,
                 Date = newIncomeAddResult.Date,
                 Title = newIncomeAddResult.Title,
@@ -160,7 +160,7 @@ namespace HHMBApp.Application.Services
                 Date = request.Date,
                 Title = request.Title,
                 Description = request.Description,
-                Category = incomeToUpdate.Category
+                CategoryId = incomeToUpdate.CategoryId
             });
 
             if (updatedIncome == null)
@@ -184,7 +184,7 @@ namespace HHMBApp.Application.Services
                 Id = updatedIncome.Id,
                 HoueseholdId = updatedIncome.HouseholdId,
                 UserId = updatedIncome.UserId,
-                CategoryId = updatedIncome.Category.Id,
+                CategoryId = updatedIncome.CategoryId,
                 Amount = updatedIncome.Amount,
                 Date = updatedIncome.Date,
                 Title = updatedIncome.Title,

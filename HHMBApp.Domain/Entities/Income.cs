@@ -10,7 +10,7 @@ public class Income
     public Guid HouseholdId { get; set; }
     public int Amount { get; set; }
     public DateTime Date { get; set; }
-    public Category Category { get; set; } = null!;
+    public Guid CategoryId { get; set; }
     public string Title { get; set; } = null!;
     public string Description { get; set; } = null!;
 }
