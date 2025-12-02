@@ -9,7 +9,7 @@ namespace HHMBApp.Infrastructure.Interfaces
 {
     public interface IIncomeRepository
     {
-        Task<Income?> Create(Income income);
+        Task<Income> Create(Income income);
         Task<Income?> Read(Guid id);
         Task<IEnumerable<Income>> ReadAll();
         Task<Income?> Update(Income income);

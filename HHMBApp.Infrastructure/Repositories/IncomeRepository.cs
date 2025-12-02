@@ -19,7 +19,7 @@ namespace HHMBApp.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<Income?> Create(Income income)
+        public async Task<Income> Create(Income income)
         {
             var addedIncome = await _context.Incomes.AddAsync(income);
             await _context.SaveChangesAsync();

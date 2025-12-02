@@ -9,7 +9,7 @@ namespace HHMBApp.Infrastructure.Interfaces
 {
     public interface IExpenseRepository
     {
-        Task<Expense?> Create(Expense expense);
+        Task<Expense> Create(Expense expense);
         Task<Expense?> Read(Guid id);
         Task<IEnumerable<Expense>> ReadAll();
         Task<Expense?> Update(Expense expense);
