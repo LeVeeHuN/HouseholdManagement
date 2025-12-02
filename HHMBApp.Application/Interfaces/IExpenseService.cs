@@ -10,9 +10,9 @@ namespace HHMBApp.Application.Interfaces
 {
     public interface IExpenseService
     {
-        Task<CreateExpenseResponseDto> CreateIncome(CreateExpenseDto request);
-        Task<CreateExpenseResponseDto> UpdateIncome(UpdateExpenseDto request);
-        Task<IEnumerable<Income>> ReadIncomes(Guid householdId);
-        Task<DeleteExpenseResponseDto> DeleteIncome(Guid id, Guid householdId);
+        Task<CreateExpenseResponseDto> CreateExpense(CreateExpenseDto request);
+        Task<CreateExpenseResponseDto> UpdateExpense(UpdateExpenseDto request);
+        Task<IEnumerable<Income>> ReadExpenses(Guid householdId);
+        Task<DeleteExpenseResponseDto> DeleteExpense(Guid id, Guid householdId);
     }
 }
