@@ -9,7 +9,7 @@ namespace HHMBApp.Application.DTOs.Grocery
     public class CreateGroceryListResponseDto : CreateGroceryListDto
     {
         public Guid Id { get; set; }
-        CreateGroceryListResult Response { get; set; }
+        public CreateGroceryListResult Response { get; set; }
     }
 
     public enum CreateGroceryListResult
