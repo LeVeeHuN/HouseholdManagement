@@ -16,7 +16,6 @@ namespace HHMBApp.Application.DTOs.Grocery
     public enum CreateGroceryListItemStatus
     {
         OK = 0,
-        CreateGroceryListItemError = 1,
-        UpdateGroceryListItemError = 2
+        CreateGroceryListItemError = 1
     }
 }
