@@ -208,7 +208,7 @@ namespace HHMBApp.Application.Services
         public async Task<CreateGroceryListResponseDto> UpdateGroceryList(UpdateGroceryListDto request)
         {
             // Check if grocery list exists
-            GroceryList? gl = await _groceryListRepository.Read(request.Id);
+            GroceryList? gl = await _groceryListRepository.Read(request.GroceryListId);
 
             if (gl == null)
             {
