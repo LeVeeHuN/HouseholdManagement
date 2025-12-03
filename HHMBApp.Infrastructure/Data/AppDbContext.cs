@@ -21,5 +21,6 @@ namespace HHMBApp.Infrastructure.Data
         public DbSet<Wish> Wishes { get; set; }
         public DbSet<GroceryList> GroceryLists { get; set; }
         public DbSet<GroceryListItem> GroceryListItems { get; set; }
+        public DbSet<Household> Households { get; set; }
     }
 }
