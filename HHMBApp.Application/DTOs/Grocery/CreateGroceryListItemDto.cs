@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HHMBApp.Application.DTOs.Grocery
+{
+    public class CreateGroceryListItemDto
+    {
+        public Guid GroceryListId { get; set; }
+        public string Title { get; set; } = null!;
+        public string? Description { get; set; }
+    }
+}
