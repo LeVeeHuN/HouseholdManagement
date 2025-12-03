@@ -13,5 +13,6 @@ namespace HHMBApp.Infrastructure.Interfaces
         Task<User?> UpdateUser(User user);
         Task<User?> ReadUser(Guid id);
         Task<User?> ReadUser(string username);
+        Task<IEnumerable<User>> ReadUsers();
     }
 }

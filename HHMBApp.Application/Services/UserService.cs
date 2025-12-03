@@ -147,5 +147,24 @@ namespace HHMBApp.Application.Services
                 Result = LoginResponseStatus.OK
             };
         }
+
+        public async Task<IEnumerable<User>> GetUsersFromHousehold(Guid householdId)
+        {
+            var users = await _userRepository.ReadUsers();
+            return users.Where(u => u.HouseholdId ==  householdId);
+        }
+
+        public async Task<User?> JoinHousehold(Guid userId, Guid householdId)
+        {
+            var user = await _userRepository.ReadUser(userId);
+            if (user == null)
+            {
+                return null;
+            }
+
+            user.HouseholdId = householdId;
+            var updatedUser = await _userRepository.UpdateUser(user);
+            return updatedUser;
+        }
     }
 }

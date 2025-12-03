@@ -42,5 +42,10 @@ namespace HHMBApp.Infrastructure.Repositories
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
         }
+
+        public async Task<IEnumerable<User>> ReadUsers()
+        {
+            return await _context.Users.ToListAsync();
+        }
     }
 }
