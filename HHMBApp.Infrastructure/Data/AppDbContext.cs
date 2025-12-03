@@ -18,5 +18,6 @@ namespace HHMBApp.Infrastructure.Data
         public DbSet<Income> Incomes { get; set; }
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<Todo> Todos { get; set; }
+        public DbSet<Wish> Wishes { get; set; }
     }
 }
