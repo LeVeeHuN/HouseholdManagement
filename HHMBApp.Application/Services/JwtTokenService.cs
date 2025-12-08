@@ -2,28 +2,26 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using HHMBApp.Application.Interfaces;
+using HHMBApp.Application.Settings;
 using HHMBApp.Domain.Entities;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace HHMBApp.Application.Services;
 
 public class JwtTokenService : IJwtTokenService
 {
-    private readonly string _secret;
-    private readonly string _issuer;
-    private readonly string _audience;
+    private readonly JwtOptions _options;
 
-    public JwtTokenService(string secret, string issuer, string audience)
+    public JwtTokenService(IOptions<JwtOptions> options)
     {
-        _secret = secret;
-        _issuer = issuer;
-        _audience = audience;
+        _options = options.Value ?? throw new ArgumentNullException(nameof(options));
     }
 
     public string GenerateToken(User user)
     {
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secret));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.Key));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         var claims = new[]
@@ -33,8 +31,8 @@ public class JwtTokenService : IJwtTokenService
         };
 
         var token = new JwtSecurityToken(
-            issuer: _issuer,
-            audience: _audience,
+            issuer: _options.Issuer,
+            audience: _options.Audience,
             claims: claims,
             expires: DateTime.UtcNow.AddHours(1),
             signingCredentials: creds);

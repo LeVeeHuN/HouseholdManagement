@@ -14,7 +14,7 @@ namespace HHMBApp.Application.Interfaces
         Task<User?> GetUser(string username);
         Task<CreateUserResponseDto> AddUser(CreateUserDto createUserDto);
         Task<UpdatePasswordResponseDto> UpdatePassword(UpdatePasswordDto updatePasswordDto);
-        Task<LoginResponseDto> Login(string username, string password);
+        Task<LoginResponseDto> Login(LoginRequestDto loginRequest);
         Task<IEnumerable<User>> GetUsersFromHousehold(Guid householdId);
         Task<User?> JoinHousehold(Guid userId, Guid householdId);
     }

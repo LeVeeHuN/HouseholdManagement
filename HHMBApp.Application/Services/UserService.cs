@@ -36,7 +36,7 @@ namespace HHMBApp.Application.Services
                     Username = null
                 };
             // Check if the username is already taken or not
-            if (await _userRepository.ReadUser(createUserDto.Username) == null)
+            if (await _userRepository.ReadUser(createUserDto.Username) != null)
             {
                 return new CreateUserResponseDto()
                 {
@@ -111,8 +111,10 @@ namespace HHMBApp.Application.Services
             };
         }
 
-        public async Task<LoginResponseDto> Login(string username, string password)
+        public async Task<LoginResponseDto> Login(LoginRequestDto loginRequest)
         {
+            string username = loginRequest.Username;
+            string password = loginRequest.Password;
             // Check credentials, and if OK generate a JWT token
             User? userToLogin = await GetUser(username);
 
