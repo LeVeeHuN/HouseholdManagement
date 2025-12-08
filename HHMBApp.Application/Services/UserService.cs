@@ -71,9 +71,9 @@ namespace HHMBApp.Application.Services
             return await _userRepository.ReadUser(userId);
         }
 
-        public async Task<User?> GetUser(string username)
+        public async Task<User?> GetUser(GetUserDto request)
         {
-            return await _userRepository.ReadUser(username);
+            return await _userRepository.ReadUser(request.username);
         }
 
         public async Task<UpdatePasswordResponseDto> UpdatePassword(UpdatePasswordDto updatePasswordDto)
@@ -104,6 +104,15 @@ namespace HHMBApp.Application.Services
             userToChangePassword.Password = BCrypt.Net.BCrypt.HashPassword(updatePasswordDto.NewPassword);
             User? updatedUser = await _userRepository.UpdateUser(userToChangePassword); // Won't be null
 
+            if (updatedUser == null)
+            {
+                return new UpdatePasswordResponseDto()
+                {
+                    UserId = userToChangePassword.Id,
+                    Result = UpdatePasswordStatus.UserNotFound
+                };
+            }
+
             return new UpdatePasswordResponseDto()
             {
                 UserId = updatedUser.Id,
@@ -116,7 +125,7 @@ namespace HHMBApp.Application.Services
             string username = loginRequest.Username;
             string password = loginRequest.Password;
             // Check credentials, and if OK generate a JWT token
-            User? userToLogin = await GetUser(username);
+            User? userToLogin = await GetUser(new GetUserDto { username = loginRequest.Username});
 
             if (userToLogin == null)
             {
@@ -156,15 +165,15 @@ namespace HHMBApp.Application.Services
             return users.Where(u => u.HouseholdId ==  householdId);
         }
 
-        public async Task<User?> JoinHousehold(Guid userId, Guid householdId)
+        public async Task<User?> JoinHousehold(JoinUserHouseholdDto request)
         {
-            var user = await _userRepository.ReadUser(userId);
+            var user = await _userRepository.ReadUser(request.UserId);
             if (user == null)
             {
                 return null;
             }
 
-            user.HouseholdId = householdId;
+            user.HouseholdId = request.HouseholdId;
             var updatedUser = await _userRepository.UpdateUser(user);
             return updatedUser;
         }

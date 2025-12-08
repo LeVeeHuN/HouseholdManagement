@@ -11,11 +11,11 @@ namespace HHMBApp.Application.Interfaces
     public interface IUserService
     {
         Task<User?> GetUser(Guid userId);
-        Task<User?> GetUser(string username);
+        Task<User?> GetUser(GetUserDto request);
         Task<CreateUserResponseDto> AddUser(CreateUserDto createUserDto);
         Task<UpdatePasswordResponseDto> UpdatePassword(UpdatePasswordDto updatePasswordDto);
         Task<LoginResponseDto> Login(LoginRequestDto loginRequest);
         Task<IEnumerable<User>> GetUsersFromHousehold(Guid householdId);
-        Task<User?> JoinHousehold(Guid userId, Guid householdId);
+        Task<User?> JoinHousehold(JoinUserHouseholdDto request);
     }
 }
