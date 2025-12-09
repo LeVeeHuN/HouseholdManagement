@@ -50,12 +50,6 @@ namespace HHMBApp.Infrastructure.Repositories
 
         public async Task<Todo?> Update(Todo todo)
         {
-            Todo? todoToUpdate = await _context.Todos.FirstOrDefaultAsync(t => t.Id == todo.Id);
-            if (todoToUpdate == null)
-            {
-                return null;
-            }
-
             _context.Todos.Update(todo);
             await _context.SaveChangesAsync();
             return todo;

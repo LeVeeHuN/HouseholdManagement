@@ -50,11 +50,6 @@ namespace HHMBApp.Infrastructure.Repositories
 
         public async Task<Wish?> Update(Wish wish)
         {
-            Wish? wishToUpdate = await _context.Wishes.FindAsync(wish.Id);
-            if (wishToUpdate == null)
-            {
-                return null;
-            }
             _context.Wishes.Update(wish);
             await _context.SaveChangesAsync();
             return wish;

@@ -50,12 +50,6 @@ namespace HHMBApp.Infrastructure.Repositories
 
         public async Task<GroceryListItem?> Update(GroceryListItem groceryListItem)
         {
-            var result = await _context.GroceryListItems.FindAsync(groceryListItem.Id);
-            if ( result == null)
-            {
-                return null;
-            }
-
             var updated = _context.GroceryListItems.Update(groceryListItem);
             await _context.SaveChangesAsync();
             return updated.Entity;

@@ -53,13 +53,6 @@ namespace HHMBApp.Infrastructure.Repositories
 
         public async Task<Expense?> Update(Expense expense)
         {
-            Expense? expenseToUpdate = await _context.Expenses.FindAsync(expense.Id);
-
-            if (expenseToUpdate == null)
-            {
-                return null;
-            }
-
             _context.Expenses.Update(expense);
             await _context.SaveChangesAsync();
 

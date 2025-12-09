@@ -52,12 +52,6 @@ namespace HHMBApp.Infrastructure.Repositories
 
         public async Task<Income?> Update(Income income)
         {
-            var incomeToUpdate = await _context.Incomes.FirstOrDefaultAsync(i => i.Id == income.Id);
-            if (incomeToUpdate == null)
-            {
-                return null;
-            }
-
             _context.Update(income);
             await _context.SaveChangesAsync();
             return income;

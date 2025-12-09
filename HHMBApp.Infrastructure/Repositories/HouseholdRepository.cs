@@ -50,12 +50,6 @@ namespace HHMBApp.Infrastructure.Repositories
 
         public async Task<Household?> Update(Household household)
         {
-            var result = await _context.Households.FindAsync(household.Id);
-            if (result == null)
-            {
-                return null;
-            }
-
             _context.Households.Update(household);
             await _context.SaveChangesAsync();
             return household;
