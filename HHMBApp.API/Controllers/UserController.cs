@@ -25,7 +25,7 @@ namespace HHMBApp.API.Controllers
 
         // TODO: Change password
 
-        [HttpGet]
+        [HttpGet("getuserbyid")]
         public async Task<ActionResult<User?>> GetUserById([FromQuery] Guid userId)
         {
             if (userId == Guid.Empty)
@@ -37,10 +37,11 @@ namespace HHMBApp.API.Controllers
             {
                 return NotFound();
             }
+            user.Password = string.Empty;
             return Ok(user);
         }
 
-        [HttpGet]
+        [HttpGet("getuserbyusername")]
         public async Task<ActionResult<User?>> GetUserByUsername([FromBody] GetUserDto request)
         {
             if (string.IsNullOrEmpty(request.username))
@@ -52,10 +53,11 @@ namespace HHMBApp.API.Controllers
             {
                 return NotFound();
             }
+            user.Password = string.Empty;
             return Ok(user);
         }
 
-        [HttpGet]
+        [HttpGet("getusersfromhousehold")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsersFromHousehold([FromQuery] Guid householdId)
         {
             if (householdId == Guid.Empty)
@@ -63,6 +65,10 @@ namespace HHMBApp.API.Controllers
                 return BadRequest();
             }
             var users = await _userService.GetUsersFromHousehold(householdId);
+            foreach (User user in users)
+            {
+                user.Password = string.Empty;
+            }
             return Ok(users);
         }
 
@@ -78,6 +84,7 @@ namespace HHMBApp.API.Controllers
             {
                 return NotFound();
             }
+            user.Password = string.Empty;
             return Ok(user);
         }
     }

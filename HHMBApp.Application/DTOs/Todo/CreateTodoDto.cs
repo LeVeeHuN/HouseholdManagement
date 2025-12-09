@@ -12,7 +12,7 @@ namespace HHMBApp.Application.DTOs.Todo
         public DateTime? DeadLine { get; set; }
         public Guid CreatedByUserId { get; set; }
         public Guid AssignedToUserId { get; set; }
-        public Guid ClosedByUserId { get; set; }
+        public Guid ClosedByUserId { get; set; } = Guid.Empty;
         public DateTime? ClosedAt { get; set; }
         public string Title { get; set; } = null!;
         public string? Description { get; set; }
