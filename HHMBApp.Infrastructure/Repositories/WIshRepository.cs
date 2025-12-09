@@ -33,6 +33,7 @@ namespace HHMBApp.Infrastructure.Repositories
             {
                 return null;
             }
+            DetachEntity(id);
             _context.Wishes.Remove(wishToDelete);
             await _context.SaveChangesAsync();
             return wishToDelete;
@@ -50,9 +51,19 @@ namespace HHMBApp.Infrastructure.Repositories
 
         public async Task<Wish?> Update(Wish wish)
         {
+            DetachEntity(wish.Id);
             _context.Wishes.Update(wish);
             await _context.SaveChangesAsync();
             return wish;
+        }
+
+        private void DetachEntity(Guid id)
+        {
+            // Detach any existing tracked instance
+            var existingEntries = _context.ChangeTracker.Entries<Wish>()
+                .Where(e => e.Entity.Id == id);
+            foreach (var entry in existingEntries)
+                entry.State = EntityState.Detached;
         }
     }
 }

@@ -34,7 +34,7 @@ namespace HHMBApp.Infrastructure.Repositories
             {
                 return null;
             }
-
+            DetachEntity(id);
             _context.Expenses.Remove(expenseToDelete);
             await _context.SaveChangesAsync();
 
@@ -53,10 +53,20 @@ namespace HHMBApp.Infrastructure.Repositories
 
         public async Task<Expense?> Update(Expense expense)
         {
+            DetachEntity(expense.Id);
             _context.Expenses.Update(expense);
             await _context.SaveChangesAsync();
 
             return expense;
+        }
+
+        private void DetachEntity(Guid id)
+        {
+            // Detach any existing tracked instance
+            var existingEntries = _context.ChangeTracker.Entries<Expense>()
+                .Where(e => e.Entity.Id == id);
+            foreach (var entry in existingEntries)
+                entry.State = EntityState.Detached;
         }
     }
 }

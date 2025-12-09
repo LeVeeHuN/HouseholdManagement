@@ -33,6 +33,7 @@ namespace HHMBApp.Infrastructure.Repositories
             {
                 return null;
             }
+            DetachEntity(id);
             _context.Todos.Remove(todoToDelete);
             await _context.SaveChangesAsync();
             return todoToDelete;
@@ -50,9 +51,19 @@ namespace HHMBApp.Infrastructure.Repositories
 
         public async Task<Todo?> Update(Todo todo)
         {
+            DetachEntity(todo.Id);
             _context.Todos.Update(todo);
             await _context.SaveChangesAsync();
             return todo;
+        }
+
+        private void DetachEntity(Guid id)
+        {
+            // Detach any existing tracked instance
+            var existingEntries = _context.ChangeTracker.Entries<Todo>()
+                .Where(e => e.Entity.Id == id);
+            foreach (var entry in existingEntries)
+                entry.State = EntityState.Detached;
         }
     }
 }

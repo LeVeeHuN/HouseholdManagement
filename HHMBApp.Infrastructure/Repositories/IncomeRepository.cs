@@ -34,7 +34,7 @@ namespace HHMBApp.Infrastructure.Repositories
             {
                 return null;
             }
-
+            DetachEntity(id);
             _context.Incomes.Remove(incomeToDelete);
             await _context.SaveChangesAsync();
             return incomeToDelete;
@@ -52,9 +52,19 @@ namespace HHMBApp.Infrastructure.Repositories
 
         public async Task<Income?> Update(Income income)
         {
+            DetachEntity(income.Id);
             _context.Update(income);
             await _context.SaveChangesAsync();
             return income;
+        }
+
+        private void DetachEntity(Guid id)
+        {
+            // Detach any existing tracked instance
+            var existingEntries = _context.ChangeTracker.Entries<Income>()
+                .Where(e => e.Entity.Id == id);
+            foreach (var entry in existingEntries)
+                entry.State = EntityState.Detached;
         }
     }
 }

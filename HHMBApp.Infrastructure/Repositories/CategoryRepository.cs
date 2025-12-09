@@ -38,6 +38,7 @@ public class CategoryRepository : ICategoryRepository
 
     public async Task<Category?> Update(Category category)
     {
+        DetachEntity(category.Id);
         var result = _context.Categories.Update(category);
         await _context.SaveChangesAsync();
         return result.Entity;
@@ -50,8 +51,18 @@ public class CategoryRepository : ICategoryRepository
         {
             return null;
         }
+        DetachEntity(id);
         _context.Categories.Remove(category);
         await _context.SaveChangesAsync();
         return category;
+    }
+
+    private void DetachEntity(Guid id)
+    {
+        // Detach any existing tracked instance
+        var existingEntries = _context.ChangeTracker.Entries<Category>()
+            .Where(e => e.Entity.Id == id);
+        foreach (var entry in existingEntries)
+            entry.State = EntityState.Detached;
     }
 }

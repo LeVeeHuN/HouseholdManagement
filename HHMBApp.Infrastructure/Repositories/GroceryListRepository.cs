@@ -33,6 +33,7 @@ namespace HHMBApp.Infrastructure.Repositories
             {
                 return null;
             }
+            DetachEntity(id);
             _context.GroceryLists.Remove(result);
             await _context.SaveChangesAsync();
             return result;
@@ -50,9 +51,19 @@ namespace HHMBApp.Infrastructure.Repositories
 
         public async Task<GroceryList?> Update(GroceryList groceryList)
         {
+            DetachEntity(groceryList.Id);
             var updated = _context.GroceryLists.Update(groceryList);
             await _context.SaveChangesAsync();
             return updated.Entity;
+        }
+
+        private void DetachEntity(Guid id)
+        {
+            // Detach any existing tracked instance
+            var existingEntries = _context.ChangeTracker.Entries<GroceryList>()
+                .Where(e => e.Entity.Id == id);
+            foreach (var entry in existingEntries)
+                entry.State = EntityState.Detached;
         }
     }
 }
