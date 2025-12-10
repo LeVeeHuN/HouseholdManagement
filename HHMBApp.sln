@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36603.0 d17.14
+VisualStudioVersion = 17.14.36603.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HHMBApp.Domain", "HHMBApp.Domain\HHMBApp.Domain.csproj", "{05C9AA74-0EBC-465A-8F3A-1F55AAEEBCC9}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HHMBApp.Infrastructure", "HHMBApp.Infrastructure\HHMBApp.Infrastructure.csproj", "{CA695CF5-6214-4D9C-A28D-86DB0E4D2534}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HHMBApp.API", "HHMBApp.API\HHMBApp.API.csproj", "{26085C0B-3822-48E0-B5A8-4137BD17E368}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HHMBApp.Maui", "HHMBApp.Maui\HHMBApp.Maui.csproj", "{2F56F508-0BE3-48BE-8916-B3D316CA811A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,11 @@ Global
 		{26085C0B-3822-48E0-B5A8-4137BD17E368}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26085C0B-3822-48E0-B5A8-4137BD17E368}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26085C0B-3822-48E0-B5A8-4137BD17E368}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F56F508-0BE3-48BE-8916-B3D316CA811A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F56F508-0BE3-48BE-8916-B3D316CA811A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F56F508-0BE3-48BE-8916-B3D316CA811A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{2F56F508-0BE3-48BE-8916-B3D316CA811A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F56F508-0BE3-48BE-8916-B3D316CA811A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
