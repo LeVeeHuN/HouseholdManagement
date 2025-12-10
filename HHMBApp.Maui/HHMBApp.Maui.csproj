@@ -66,4 +66,9 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.8" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\HHMBApp.Application\HHMBApp.Application.csproj" />
+	  <ProjectReference Include="..\HHMBApp.Domain\HHMBApp.Domain.csproj" />
+	</ItemGroup>
+
 </Project>
