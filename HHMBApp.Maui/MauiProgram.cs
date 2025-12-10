@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using HHMBApp.Maui.Services;
+using Microsoft.Extensions.Logging;
 
 namespace HHMBApp.Maui
 {
@@ -18,6 +19,11 @@ namespace HHMBApp.Maui
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+
+            builder.Services.AddHttpClient<IAuthService, AuthService>(client =>
+            {
+                client.BaseAddress = new Uri("http://localhost:5000/api/");
+            });
 
             return builder.Build();
         }
