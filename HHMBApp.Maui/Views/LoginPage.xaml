@@ -4,6 +4,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HHMBApp.Maui.Views.LoginPage"
              Title="Login">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ScrollView>
         <VerticalStackLayout
             Padding="24"
@@ -19,7 +24,7 @@
             <Button
                 Text="Login"
                 Command="{Binding LoginCommand}"
-                IsEnabled="{Binding IsBusy, Converter={toolkit:InverseBoolConverter}}"/>
+                IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"/>
 
             <ActivityIndicator
                 IsRunning="{Binding IsBusy}"
@@ -28,7 +33,7 @@
             <Label
                 Text="{Binding ErrorMessage}"
                 TextColor="Red"
-                IsVisible="{Binding ErrorMessage, Converter={toolkit:StringNotNullOrEmptyConverter}}"/>
+                IsVisible="{Binding ErrorMessage, Converter={toolkit:IsStringNotNullOrEmptyConverter}}"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

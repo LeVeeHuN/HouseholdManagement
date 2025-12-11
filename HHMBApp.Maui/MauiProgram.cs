@@ -3,6 +3,7 @@ using HHMBApp.Maui.Services;
 using HHMBApp.Maui.ViewModels;
 using HHMBApp.Maui.Views;
 using Microsoft.Extensions.Logging;
+using CommunityToolkit.Maui;
 
 namespace HHMBApp.Maui
 {
@@ -13,6 +14,7 @@ namespace HHMBApp.Maui
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
