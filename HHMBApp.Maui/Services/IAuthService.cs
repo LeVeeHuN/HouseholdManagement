@@ -13,7 +13,7 @@ namespace HHMBApp.Maui.Services
 
         Task<string?> GetTokenAsync();
         Task<DateTimeOffset?> GetTokenExpiryAsync();
-        Task<bool> IsAuthenticated();
+        Task<bool> IsAuthenticatedAsync();
         Task<Guid> GetUserIdAsync();
     }
 }

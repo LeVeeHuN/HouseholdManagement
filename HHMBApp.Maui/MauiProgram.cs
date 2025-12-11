@@ -1,4 +1,7 @@
-﻿using HHMBApp.Maui.Services;
+﻿using HHMBApp.Maui.Helpers;
+using HHMBApp.Maui.Services;
+using HHMBApp.Maui.ViewModels;
+using HHMBApp.Maui.Views;
 using Microsoft.Extensions.Logging;
 
 namespace HHMBApp.Maui
@@ -24,8 +27,21 @@ namespace HHMBApp.Maui
             {
                 client.BaseAddress = new Uri("http://localhost:5000/api/");
             });
+            builder.Services.AddTransient<StartupViewModel>();
+            builder.Services.AddTransient<StartupPage>();
+            builder.Services.AddTransient<LoginViewModel>();
+            builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddHttpClient<IUserService, UserService>(client =>
+            {
+                client.BaseAddress = new Uri("http://localhost:5000/api/");
+            });
+            builder.Services.AddTransient<HouseholdCheckViewModel>();
+            builder.Services.AddTransient<HouseholdCheckPage>();
 
-            return builder.Build();
+
+            var app = builder.Build();
+            ServiceHelper.Initialize(app.Services);
+            return app;
         }
     }
 }

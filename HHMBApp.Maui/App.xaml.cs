@@ -1,10 +1,13 @@
-﻿namespace HHMBApp.Maui
+﻿using HHMBApp.Maui.Views;
+
+namespace HHMBApp.Maui
 {
-    public partial class App : Application
+    public partial class App : Microsoft.Maui.Controls.Application
     {
-        public App()
+        public App(StartupPage startupPage)
         {
             InitializeComponent();
+            MainPage = startupPage;
         }
 
         protected override Window CreateWindow(IActivationState? activationState)

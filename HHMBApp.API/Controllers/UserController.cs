@@ -87,5 +87,18 @@ namespace HHMBApp.API.Controllers
             user.Password = string.Empty;
             return Ok(user);
         }
+
+        [HttpGet("gethouseholdid")]
+        public async Task<ActionResult<GetHouseholdIdDto>> GetHouseholdId([FromQuery] Guid userId)
+        {
+            var user = await _userService.GetUser(userId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(new GetHouseholdIdDto { HouseholdId = user.HouseholdId, UserId = user.Id });
+        }
     }
 }

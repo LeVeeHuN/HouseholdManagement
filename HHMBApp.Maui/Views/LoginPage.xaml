@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HHMBApp.Maui.Views.LoginPage"
+             Title="Login">
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="24"
+            Spacing="12">
+            <Entry
+                Placeholder="Username"
+                Text="{Binding Username}"/>
+            <Entry
+                Placeholder="Password"
+                IsPassword="True"
+                Text="{Binding Password}"/>
+
+            <Button
+                Text="Login"
+                Command="{Binding LoginCommand}"
+                IsEnabled="{Binding IsBusy, Converter={toolkit:InverseBoolConverter}}"/>
+
+            <ActivityIndicator
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"/>
+
+            <Label
+                Text="{Binding ErrorMessage}"
+                TextColor="Red"
+                IsVisible="{Binding ErrorMessage, Converter={toolkit:StringNotNullOrEmptyConverter}}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -46,7 +46,7 @@ namespace HHMBApp.Maui.Services
             return Guid.Parse(uid);
         }
 
-        public async Task<bool> IsAuthenticated()
+        public async Task<bool> IsAuthenticatedAsync()
         {
             var token = await GetTokenAsync();
             if (token == null || string.IsNullOrWhiteSpace(token))
